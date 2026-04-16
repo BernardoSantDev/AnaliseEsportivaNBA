@@ -9,4 +9,8 @@ def main():
     coluna = input("Estatística você quer analisar? (ex: PONTOS, REBOTES): ")
     limite = float(input("Limite da aposta (ex: 25): "))
     adversario = input("Adversário do jogador (ex: BOS): ")
-    Ultimos_jogos = int(input("Número de jogos recentes para análise (ex: 5): "))
+    ultimos_jogos = int(input("Número de jogos recentes para análise (ex: 5): "))
+
+    print("\nRESULTADOS DA ANÁLISE:\n")
+    tendencia_recente(df, coluna, limite, ultimos_jogos)
+    tendencia_vs_time(df, adversario, coluna, limite)
