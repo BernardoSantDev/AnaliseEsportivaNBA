@@ -14,3 +14,6 @@ def main():
     print("\nRESULTADOS DA ANÁLISE:\n")
     tendencia_recente(df, coluna, limite, ultimos_jogos)
     tendencia_vs_time(df, adversario, coluna, limite)
+
+if __name__ == "__main__":
+    main()
