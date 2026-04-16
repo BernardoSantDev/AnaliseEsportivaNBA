@@ -1,6 +1,23 @@
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playergamelog
+from datetime import datetime
 
+#Criando uma função para checar qual a temporada atual
+def temporada_atual():
+    hoje = datetime.now()
+    ano = hoje.year
+    mes = hoje.month
+
+    if mes >= 10:  # Se for outubro ou depois, a temporada é do ano atual
+        return f"{ano}-{str(ano+1)[-2:]}"
+    else:
+        return f"{ano-1}-{str(ano)[-2:]}"
+
+
+
+#Essa função eu utilizo para buscar o ID do jogador a partir do nome completo, pois a API da NBA utiliza o ID para realizar as consultas de dados. 
+#A função percorre a lista de jogadores disponíveis e compara o nome completo com o nome fornecido, retornando o ID correspondente. 
+# Se o jogador não for encontrado, a função retorna None.
 def buscar_player_id(nome_jogador):
     lista_players = players.get_players()
     for player in lista_players:
