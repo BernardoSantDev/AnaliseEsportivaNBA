@@ -24,3 +24,23 @@ def buscar_player_id(nome_jogador):
         if player['full_name'].lower() == nome_jogador.lower():
             return player['id']
     return None
+
+
+#Cria a função para carregar os dados do jogador, utilizando o ID obtido pela função anterior.
+def carregar_dados_jogador(nome_jogador):
+    season = temporada_atual()
+    player_id = buscar_player_id(nome_jogador)
+
+    if player_id is None:
+        print(f"Jogador '{nome_jogador}' não encontrado.")
+        return None
+    
+    gamelog = playergamelog.PlayerGameLog(
+        player_id=player_id, 
+        season=season)
+    
+    df = gamelog.get_data_frames()[0]
+
+    print(f"Temporada carregada automaticamente: {season}")
+    
+    return df
