@@ -1,0 +1,13 @@
+def limpar_dataframe(df):
+
+    df = df.rename(columns={
+        "GAME_DATE": 'DATA',
+        "PTS": 'PONTOS',
+        "AST": 'ASSISTENCIA',
+        "REB": 'REBOTES',
+        "FG3M": "C3_CONVERTIDOS",
+        "FG3A": "C3_TENTADOS",
+        "FTM": "LL_CONVERTIDOS",
+        "FTA": "LL_TENTADOS",
+        "MIN": "MINUTOS"
+    })
