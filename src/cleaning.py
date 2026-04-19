@@ -17,3 +17,7 @@ def limpar_dataframe(df):
 
     #garantindo que os jogos mais recentes ficam no topo
     df = df.sort_values(by="DATA", ascending=False)
+
+    df = df.reset_index(drop=True)
+
+    return df
