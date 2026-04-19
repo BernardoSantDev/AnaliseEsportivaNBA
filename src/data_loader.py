@@ -1,6 +1,7 @@
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playergamelog
 from datetime import datetime
+import unicodedata
 
 #Criando uma função para checar qual a temporada atual
 def temporada_atual():
@@ -18,11 +19,34 @@ def temporada_atual():
 #Essa função eu utilizo para buscar o ID do jogador a partir do nome completo, pois a API da NBA utiliza o ID para realizar as consultas de dados. 
 #A função percorre a lista de jogadores disponíveis e compara o nome completo com o nome fornecido, retornando o ID correspondente. 
 # Se o jogador não for encontrado, a função retorna None.
+
+def remover_acentos(texto):
+
+    return unicodedata.normalize(
+        "NFKD", texto
+    ).encode(
+        "ASCII", "ignore"
+    ).decode("ASCII")
+
+
 def buscar_player_id(nome_jogador):
+
+    nome_input = remover_acentos(nome_jogador.lower())
+
     lista_players = players.get_players()
+
     for player in lista_players:
-        if player['full_name'].lower() == nome_jogador.lower():
-            return player['id']
+
+        nome_api = remover_acentos(
+            player["full_name"].lower()
+        )
+
+        if nome_input in nome_api:
+
+            return player["id"]
+
+    print(f"Jogador '{nome_jogador}' não encontrado.")
+
     return None
 
 
