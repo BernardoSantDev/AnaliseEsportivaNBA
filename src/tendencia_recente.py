@@ -15,7 +15,7 @@ def tendencia_recente(df, estatistica, linha, ultimos_jogos):
     for i, row in df_recente.iterrows():
 
         print(
-            f"{row['DATA']} | vs {row['ADVERSARIO']} → "
+            f"{row['DATA'].strftime('%d/%m/%Y')} | vs {row['ADVERSARIO']} → "
             f"{row[estatistica]} {estatistica}"
         )
 
