@@ -14,4 +14,6 @@ def limpar_dataframe(df):
 
     #extraindo a sigla do adversario
     df['ADVERSARIO'] = df['MATCHUP'].str[-3:]
-    
+
+    #garantindo que os jogos mais recentes ficam no topo
+    df = df.sort_values(by="DATA", ascending=False)
