@@ -15,7 +15,7 @@ def tendencia_vs_time(df, adversario, estatistica, linha):
     for i, row in df_time.iterrows():
 
         print(
-            f"{row['DATA']} → {row[estatistica]} {estatistica}"
+            f"{row['DATA'].strftime('%d/%m/%Y')} → {row[estatistica]} {estatistica}"
         )
 
 
