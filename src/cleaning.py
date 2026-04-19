@@ -11,3 +11,7 @@ def limpar_dataframe(df):
         "FTA": "LL_TENTADOS",
         "MIN": "MINUTOS"
     })
+
+    #extraindo a sigla do adversario
+    df['ADVERSARIO'] = df['MATCHUP'].str[-3:]
+    
