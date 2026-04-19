@@ -1,4 +1,5 @@
 def tendencia_vs_time(df, adversario, estatistica, linha):
+
     df_time = df[df["ADVERSARIO"] == adversario.upper()]
 
     if df_time.empty:
@@ -7,31 +8,28 @@ def tendencia_vs_time(df, adversario, estatistica, linha):
 
         return
 
+
+    print(f"\n🏀 Jogos contra {adversario.upper()}:\n")
+
+
+    for i, row in df_time.iterrows():
+
+        print(
+            f"{row['DATA']} → {row[estatistica]} {estatistica}"
+        )
+
+
     acertos = (df_time[estatistica] >= linha).sum()
 
     total = len(df_time)
 
     porcentagem = (acertos / total) * 100
 
+
+    print("\nResumo:")
+
+
     print(
-        f"Contra {adversario.upper()}: "
         f"{acertos}/{total} jogos ({porcentagem:.1f}%) "
         f"com {linha}+ em {estatistica}"
     )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
