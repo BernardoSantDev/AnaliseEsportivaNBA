@@ -1,5 +1,5 @@
 from data_loader import carregar_dados_jogador
-from cleaning import limpar_dataframe
+from cleaning import limpar_dados
 from tendencia_recente import tendencia_recente
 from tendencia_vs_time import tendencia_vs_time
 
@@ -27,8 +27,7 @@ def main():
         return
 
 
-    df = limpar_dataframe(df)
-
+    df = limpar_dados(df)
 
     print("\n📊 Tendência recente:\n")
 

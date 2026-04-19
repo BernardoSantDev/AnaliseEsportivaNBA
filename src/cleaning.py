@@ -1,23 +1,44 @@
-def limpar_dataframe(df):
+import pandas as pd
+
+
+def limpar_dados(df):
 
     df = df.rename(columns={
-        "GAME_DATE": 'DATA',
-        "PTS": 'PONTOS',
-        "AST": 'ASSISTENCIA',
-        "REB": 'REBOTES',
+
+        "GAME_DATE": "DATA",
+        "MATCHUP": "CONFRONTO",
+        "WL": "RESULTADO",
+        "MIN": "MINUTOS",
+        "FGM": "CESTAS_CONVERTIDAS",
+        "FGA": "CESTAS_TENTADAS",
         "FG3M": "C3_CONVERTIDOS",
         "FG3A": "C3_TENTADOS",
         "FTM": "LL_CONVERTIDOS",
         "FTA": "LL_TENTADOS",
-        "MIN": "MINUTOS"
+        "REB": "REBOTES",
+        "AST": "ASSISTENCIAS",
+        "STL": "ROUBOS",
+        "BLK": "TOCOS",
+        "PTS": "PONTOS"
+
     })
 
-    #extraindo a sigla do adversario
-    df['ADVERSARIO'] = df['MATCHUP'].str[-3:]
 
-    #garantindo que os jogos mais recentes ficam no topo
-    df = df.sort_values(by="DATA", ascending=False)
+    df["ADVERSARIO"] = df["CONFRONTO"].str[-3:]
+
+
+    df["FG_%"] = df["CESTAS_CONVERTIDAS"] / df["CESTAS_TENTADAS"]
+
+    df["C3_%"] = df["C3_CONVERTIDOS"] / df["C3_TENTADOS"]
+
+    df["LL_%"] = df["LL_CONVERTIDOS"] / df["LL_TENTADOS"]
+
+
+    df["DATA"] = pd.to_datetime(df["DATA"])
+
+    df = df.sort_values("DATA", ascending=False)
 
     df = df.reset_index(drop=True)
+
 
     return df
