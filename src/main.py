@@ -56,6 +56,13 @@ def main():
         linha
     )
 
+    calcular_medias(
+        df,
+        estatistica,
+        adversario,
+        ultimos_jogos
+    )
+
     print("\n⏱️ Análise por minutos jogados:")
     usar_filtro = input("Deseja filtrar por minutos? (S/N): ").upper()
     if usar_filtro == "S":
