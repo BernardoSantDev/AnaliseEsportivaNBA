@@ -87,3 +87,18 @@ def carregar_dados_jogador(nome_jogador):
         [df_regular, df_playoffs],
         ignore_index=True
     )
+
+    # ordenar do mais recente para o mais antigo
+    df_total["GAME_DATE"] = pd.to_datetime(
+        df_total["GAME_DATE"]
+    )
+
+    df_total = df_total.sort_values(
+        by="GAME_DATE",
+        ascending=False
+    )
+    print(f"Temporada carregada automaticamente: {season}")
+    print("Incluindo temporada regular + playoffs")
+
+
+    return df_total
