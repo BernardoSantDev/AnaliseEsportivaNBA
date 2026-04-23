@@ -2,6 +2,8 @@ from nba_api.stats.static import players
 from nba_api.stats.endpoints import playergamelog
 from datetime import datetime
 import unicodedata
+import pandas as pd
+
 
 #Criando uma função para checar qual a temporada atual
 def temporada_atual():
@@ -59,12 +61,17 @@ def carregar_dados_jogador(nome_jogador):
         print(f"Jogador '{nome_jogador}' não encontrado.")
         return None
     
-    gamelog = playergamelog.PlayerGameLog(
+
+
+    # temporada regular
+    gamelog_regular  = playergamelog.PlayerGameLog(
         player_id=player_id, 
-        season=season)
+        season=season,
+        season_type_all_star="Regular Season"
+    )
     
-    df = gamelog.get_data_frames()[0]
+    df_regular = gamelog_regular.get_data_frames()[0]
 
     print(f"Temporada carregada automaticamente: {season}")
     
-    return df
+    return df_regular
