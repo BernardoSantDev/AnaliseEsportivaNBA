@@ -53,52 +53,49 @@ def buscar_player_id(nome_jogador):
 
 
 #Cria a função para carregar os dados do jogador, utilizando o ID obtido pela função anterior.
-def carregar_dados_jogador(nome_jogador):
-    season = temporada_atual()
+def carregar_dados_jogador(nome_jogador, tipo_temporada):
+    
     player_id = buscar_player_id(nome_jogador)
 
     if player_id is None:
         print(f"Jogador '{nome_jogador}' não encontrado.")
         return None
-    
 
+    season = temporada_atual()
 
-    # temporada regular
-    gamelog_regular  = playergamelog.PlayerGameLog(
-        player_id=player_id, 
-        season=season,
-        season_type_all_star="Regular Season"
-    )
-    
-    df_regular = gamelog_regular.get_data_frames()[0]
+    if tipo_temporada == "1":
 
+        df = playergamelog.PlayerGameLog(
+            player_id=player_id,
+            season=season,
+            season_type_all_star="Regular Season"
+        ).get_data_frames()[0]
 
-    # playoffs
-    gamelog_playoffs = playergamelog.PlayerGameLog(
-        player_id=player_id,
-        season=season,
-        season_type_all_star="Playoffs"
-    )
+    elif tipo_temporada == "2":
 
-    df_playoffs = gamelog_playoffs.get_data_frames()[0]
+        df = playergamelog.PlayerGameLog(
+            player_id=player_id,
+            season=season,
+            season_type_all_star="Playoffs"
+        ).get_data_frames()[0]
 
-    # juntar datasets
-    df_total = pd.concat(
-        [df_regular, df_playoffs],
-        ignore_index=True
-    )
+    elif tipo_temporada == "3":
 
-    # ordenar do mais recente para o mais antigo
-    df_total["GAME_DATE"] = pd.to_datetime(
-        df_total["GAME_DATE"]
-    )
+        regular = playergamelog.PlayerGameLog(
+            player_id=player_id,
+            season=season,
+            season_type_all_star="Regular Season"
+        ).get_data_frames()[0]
 
-    df_total = df_total.sort_values(
-        by="GAME_DATE",
-        ascending=False
-    )
-    print(f"Temporada carregada automaticamente: {season}")
-    print("Incluindo temporada regular + playoffs")
+        playoffs = playergamelog.PlayerGameLog(
+            player_id=player_id,
+            season=season,
+            season_type_all_star="Playoffs"
+        ).get_data_frames()[0]
 
+        df = pd.concat([regular, playoffs])
 
-    return df_total
+    else:
+        raise ValueError("Opção inválida.")
+
+    return df
