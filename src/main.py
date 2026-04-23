@@ -2,6 +2,7 @@ from data_loader import carregar_dados_jogador
 from cleaning import limpar_dados
 from tendencia_recente import tendencia_recente
 from tendencia_vs_time import tendencia_vs_time
+from tendencia_por_minutos import tendencia_por_minutos
 
 
 def main():
