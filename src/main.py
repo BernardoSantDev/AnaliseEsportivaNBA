@@ -19,11 +19,17 @@ def main():
 
     ultimos_jogos = int(input("Últimos quantos jogos analisar? "))
 
+    print("\nModo de análise:")
+    print("1 - Regular Season")
+    print("2 - Playoffs")
+    print("3 - Ambos")
+    tipo_temporada = input("Escolha: ")
 
-    df = carregar_dados_jogador(jogador)
+
+    df = carregar_dados_jogador(jogador, tipo_temporada)
+
 
     if df is None:
-
         return
 
 
