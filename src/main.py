@@ -55,6 +55,19 @@ def main():
         linha
     )
 
+    print("\n⏱️ Análise por minutos jogados:")
+    usar_filtro = input("Deseja filtrar por minutos? (S/N): ").upper()
+    if usar_filtro == "S":
+        min_minutos = int(input("Minutos mínimos: "))
+        max_minutos = int(input("Minutos máximos: "))
+        tendencia_por_minutos(
+            df,
+            estatistica,
+            linha,
+            min_minutos,
+            max_minutos
+        )
+
 
 if __name__ == "__main__":
 
