@@ -72,6 +72,16 @@ def carregar_dados_jogador(nome_jogador):
     
     df_regular = gamelog_regular.get_data_frames()[0]
 
+
+    # playoffs
+    gamelog_playoffs = playergamelog.PlayerGameLog(
+        player_id=player_id,
+        season=season,
+        season_type_all_star="Playoffs"
+    )
+
+    df_playoffs = gamelog_playoffs.get_data_frames()[0]
+
     print(f"Temporada carregada automaticamente: {season}")
     
     return df_regular
