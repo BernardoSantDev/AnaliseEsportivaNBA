@@ -82,6 +82,8 @@ def carregar_dados_jogador(nome_jogador):
 
     df_playoffs = gamelog_playoffs.get_data_frames()[0]
 
-    print(f"Temporada carregada automaticamente: {season}")
-    
-    return df_regular
+    # juntar datasets
+    df_total = pd.concat(
+        [df_regular, df_playoffs],
+        ignore_index=True
+    )
