@@ -46,3 +46,10 @@ mapa_temporada = {
     "Playoffs": "2",
     "Ambos": "3"
 }
+
+ultimos = st.slider("Últimos jogos analisados", 5, 20, 10)
+usar_minutos = st.checkbox("Filtrar por minutos jogados")
+
+if usar_minutos:
+    min_min = st.number_input("Min minutos", value=20)
+    max_min = st.number_input("Max minutos", value=40)
