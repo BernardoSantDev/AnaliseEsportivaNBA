@@ -32,3 +32,11 @@ estatistica = st.selectbox( "Estatística", [
 
 linha = st.number_input("Linha da aposta", value=10)
 adversario = st.text_input("Adversário (ex: BOS, LAL, MIN)")
+
+tipo_temporada = st.selectbox( 
+    "Tipo de temporada", 
+    [ 
+        "Regular Season",
+        "Playoffs", 
+        "Ambos" 
+    ] )
