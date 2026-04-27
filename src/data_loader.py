@@ -54,8 +54,8 @@ def buscar_player_id(nome_jogador):
 
 
 #Cria a função para carregar os dados do jogador, utilizando o ID obtido pela função anterior.
-def carregar_dados_jogador(nome_jogador, tipo_temporada):
-    
+@st.cache_data(ttl=3600)
+def carregar_dados_jogador(nome_jogador, tipo_temporada):    
     player_id = buscar_player_id(nome_jogador)
 
     if player_id is None:
