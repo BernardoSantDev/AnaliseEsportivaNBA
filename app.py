@@ -12,3 +12,20 @@ st.title("Analizador de Estatistica da NBA")
 st.write("Analise tendências estatísticas de jogadores da NBA")
 
 nome = st.text_input("Nome do jogador")
+
+estatistica = st.selectbox( "Estatística", [ 
+    "PONTOS", 
+    "ASSISTENCIAS", 
+    "REBOTES", 
+    "REBOTES_OFENSIVOS", 
+    "REBOTES_DEFENSIVOS", 
+    "ROUBOS", 
+    "TOCOS", 
+    "TURNOVERS", 
+    "C3_CONVERTIDOS", 
+    "C3_TENTADOS", 
+    "LL_CONVERTIDOS", 
+    "LL_TENTADOS", 
+    "MINUTOS", 
+    "PLUS_MINUS" 
+    ])
