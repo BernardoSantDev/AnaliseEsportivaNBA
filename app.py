@@ -10,3 +10,5 @@ st.set_page_config(page_title="NBA Props Analizador", layout="centered")
 
 st.title("Analizador de Estatistica da NBA")
 st.write("Analise tendências estatísticas de jogadores da NBA")
+
+nome = st.text_input("Nome do jogador")
