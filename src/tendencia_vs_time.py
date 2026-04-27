@@ -1,35 +1,25 @@
-def tendencia_vs_time(df, adversario, estatistica, linha):
+import streamlit as st
 
-    df_time = df[df["ADVERSARIO"] == adversario.upper()]
+def tendencia_vs_time(df, estatistica, linha, adversario):
+
+    df_time = df[df["ADVERSARIO"] == adversario]
 
     if df_time.empty:
-
-        print("Nenhum jogo encontrado contra esse adversário.")
-
+        st.warning("Nenhum jogo encontrado contra esse adversário.")
         return
 
+    st.write(f"🏀 Jogos contra {adversario}")
 
-    print(f"\n🏀 Jogos contra {adversario.upper()}:\n")
+    tabela = df_time[["DATA", estatistica]].copy()
+    tabela["DATA"] = tabela["DATA"].dt.strftime("%d/%m/%Y")
 
-
-    for i, row in df_time.iterrows():
-
-        print(
-            f"{row['DATA'].strftime('%d/%m/%Y')} → {row[estatistica]} {estatistica}"
-        )
-
+    st.dataframe(tabela)
 
     acertos = (df_time[estatistica] >= linha).sum()
-
     total = len(df_time)
-
     porcentagem = (acertos / total) * 100
 
-
-    print("\nResumo:")
-
-
-    print(
+    st.success(
         f"{acertos}/{total} jogos ({porcentagem:.1f}%) "
         f"com {linha}+ em {estatistica}"
     )
