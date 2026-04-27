@@ -1,0 +1,9 @@
+import streamlit as st
+from src.data_loader import carregar_dados_jogador
+from src.cleaning import limpar_dados
+from src.tendencia_recente import tendencia_recente
+from src.tendencia_vs_time import tendencia_vs_time
+from src.tendencia_por_minutos import tendencia_por_minutos
+from src.medias_estatisticas import calcular_medias
+
+st.set_page_config(page_title="NBA Props Analizador", layout="centered")
