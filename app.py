@@ -5,6 +5,8 @@ from src.tendencia_recente import tendencia_recente
 from src.tendencia_vs_time import tendencia_vs_time
 from src.tendencia_por_minutos import tendencia_por_minutos
 from src.medias_estatisticas import calcular_medias
+from src.grafico_tendencia import grafico_tendencia
+from src.probabilidade import calcular_probabilidade
 
 st.set_page_config(page_title="NBA Props Analizador", layout="centered")
 
