@@ -191,18 +191,31 @@ Adversário: MIN
 ## 📈 Funcionalidades atuais
 
 ✔ coleta automática da temporada mais recente
+
 ✔ suporte a Regular Season + Playoffs
+
 ✔ análise últimos X jogos
+
 ✔ análise vs adversário
+
 ✔ taxa de acerto vs linha da aposta
+
 ✔ listagem detalhada dos jogos
+
 ✔ formatação automática de datas
+
 ✔ cálculo de aproveitamento estatístico
+
 ✔ cálculo de médias (recente / temporada / vs adversário)
+
 ✔ filtro por minutos jogados
+
 ✔ gráfico de tendência da estatística
+
 ✔ cálculo de probabilidade (%)
+
 ✔ cálculo de odd justa
+
 ✔ dashboard interativo com Streamlit
 
 
