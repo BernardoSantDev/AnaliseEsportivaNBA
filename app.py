@@ -40,3 +40,9 @@ tipo_temporada = st.selectbox(
         "Playoffs", 
         "Ambos" 
     ] )
+
+mapa_temporada = {
+    "Regular Season": "1",
+    "Playoffs": "2",
+    "Ambos": "3"
+}
