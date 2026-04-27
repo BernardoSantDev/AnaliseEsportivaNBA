@@ -82,6 +82,15 @@ if st.button("Analisar jogador"):
                 estatistica,
                 ultimos
             )
+
+            st.subheader("🎯 Probabilidade da linha")
+            calcular_probabilidade(
+                df,
+                estatistica,
+                linha,
+                ultimos
+            )
+
             st.subheader("🏀 Tendência vs adversário")
             tendencia_vs_time(
                 df,
