@@ -9,9 +9,7 @@
 Ferramenta de **Sports Analytics com Python** que analisa estatísticas de jogadores da NBA usando dados oficiais da API da liga para gerar **insights automatizados para Player Props**.
 
 Projeto construído seguindo um pipeline completo de Data Science:
-
-API → limpeza → transformação → análise → insights
-
+API → Data Cleaning → Feature Engineering → Analysis → Insight Generation
 
 ---
 
@@ -91,20 +89,19 @@ Conceitos aplicados:
 ```bash
 AnaliseEsportivaNBA/
 
-├── src/
-│   ├── main.py
-│   ├── data_loader.py
-│   ├── cleaning.py
-│   ├── tendencia_recente.py
-│   └── tendencia_vs_time.py
-│
-├── data/
-│   ├── raw/
-│   └── processed/
-│
+├── app.py
 ├── requirements.txt
-├── .gitignore
-└── README.md
+├── README.md
+│
+└── src/
+    ├── data_loader.py
+    ├── cleaning.py
+    ├── tendencia_recente.py
+    ├── tendencia_vs_time.py
+    ├── tendencia_por_minutos.py
+    ├── medias_estatisticas.py
+    ├── grafico_tendencia.py
+    └── probabilidade.py
 ```
 
 
@@ -139,7 +136,13 @@ Instale dependências:
 ```bash
 pip install -r requirements.txt
 ```
+---
 
+## 🌐 Acesse o projeto
+
+```bash
+https://nba-props-analyzer-app.streamlit.app/
+```
 
 ---
 
@@ -148,13 +151,15 @@ pip install -r requirements.txt
 
 Principais bibliotecas:
 ```bash
-nba_api
-pandas
+    nba_api
+    pandas
+    streamlit
+    matplotlib
 ```
 
 Caso necessário instalar manualmente:
 ```bash
-pip install nba_api pandas
+    pip install nba_api pandas streamlit matplotlib
 ```
 
 ---
@@ -162,7 +167,12 @@ pip install nba_api pandas
 ## ▶️ EXECUTAR PROJETO
 
 
-Rodar:
+Rodar (modo dashboard):
+```bash
+streamlit run app.py
+```
+
+Rodar (modo terminal):
 ```bash
 python src/main.py
 ```
@@ -176,22 +186,24 @@ Adversário: MIN
 Últimos jogos: 10
 ```
 
-
----
-
-
-
 ---
 
 ## 📈 Funcionalidades atuais
 
-✔ coleta automática da temporada mais recente  
-✔ análise últimos X jogos  
-✔ análise vs adversário  
-✔ taxa de acerto vs linha da aposta  
-✔ listagem detalhada dos jogos  
-✔ formatação automática de datas  
-✔ cálculo de aproveitamento estatístico  
+✔ coleta automática da temporada mais recente
+✔ suporte a Regular Season + Playoffs
+✔ análise últimos X jogos
+✔ análise vs adversário
+✔ taxa de acerto vs linha da aposta
+✔ listagem detalhada dos jogos
+✔ formatação automática de datas
+✔ cálculo de aproveitamento estatístico
+✔ cálculo de médias (recente / temporada / vs adversário)
+✔ filtro por minutos jogados
+✔ gráfico de tendência da estatística
+✔ cálculo de probabilidade (%)
+✔ cálculo de odd justa
+✔ dashboard interativo com Streamlit
 
 
 ---
@@ -200,15 +212,14 @@ Adversário: MIN
 
 Próximas melhorias planejadas:
 
-- filtro por minutos jogados
-- média da temporada
-- média últimos jogos
-- média vs adversário
+- comparação com odds reais (casas de aposta)
+- sistema de recomendação (OVER / UNDER)
 - exportação CSV automática
 - exportação Excel automática
-- dashboard interativo
-- interface web com Streamlit
-
+- melhoria dos gráficos (média móvel, linha da aposta)
+- deploy com domínio próprio
+- criação de API própria de análise
+- aplicação de Machine Learning para previsão
 
 ---
 
@@ -236,8 +247,6 @@ Este projeto pode ser aplicado em diferentes cenários de **Sports Analytics** e
 -  **Portfolio profissional** — demonstração prática de pipeline com API + análise
 
 
-
-
 ---
 
 ##  👨‍💻 Autor
@@ -257,9 +266,8 @@ Projeto desenvolvido como prática aplicada de:
 
 Evoluções planejadas para transformar o projeto em uma ferramenta completa de análise:
 
-- Transformar em **CLI Tool profissional**
-- Criar **Dashboard interativo com Streamlit**
 - Desenvolver uma **API própria de análise de props**
-- Adicionar médias automáticas (últimos jogos / temporada / vs adversário)
-- Filtro por minutos jogados
-- Exportação automática para CSV e Excel
+- Adicionar sistema inteligente de recomendação de apostas
+- Comparar estatísticas com odds reais do mercado
+- Aplicar modelos de Machine Learning
+- Melhorar experiência do usuário (UX/UI)
