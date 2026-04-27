@@ -53,3 +53,47 @@ usar_minutos = st.checkbox("Filtrar por minutos jogados")
 if usar_minutos:
     min_min = st.number_input("Min minutos", value=20)
     max_min = st.number_input("Max minutos", value=40)
+
+
+if st.button("Analisar jogador"):
+    if nome == "" or adversario == "":
+        st.warning("Preencha jogador e adversário")
+    else:
+        df = carregar_dados_jogador(
+            nome,
+            mapa_temporada[tipo_temporada]
+        )
+        if df is None:
+            st.error("Jogador não encontrado")
+        else:
+            df = limpar_dados(df)
+            st.subheader("📊 Tendência recente")
+            tendencia_recente(
+                df,
+                estatistica,
+                linha,
+                ultimos
+            )
+            st.subheader("🏀 Tendência vs adversário")
+            tendencia_vs_time(
+                df,
+                estatistica,
+                linha,
+                adversario.upper()
+            )
+            if usar_minutos:
+                st.subheader("⏱️ Tendência por minutos")
+                tendencia_por_minutos(
+                    df,
+                    estatistica,
+                    linha,
+                    min_min,
+                    max_min
+                )
+            st.subheader("📈 Médias comparativas")
+            calcular_medias(
+                df,
+                estatistica,
+                adversario.upper(),
+                ultimos
+            )
