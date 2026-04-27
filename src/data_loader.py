@@ -3,6 +3,7 @@ from nba_api.stats.endpoints import playergamelog
 from datetime import datetime
 import unicodedata
 import pandas as pd
+import streamlit as st
 
 
 #Criando uma função para checar qual a temporada atual
