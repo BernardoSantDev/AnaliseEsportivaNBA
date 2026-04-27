@@ -53,54 +53,55 @@ def buscar_player_id(nome_jogador):
     return None
 
 
-#Cria a função para carregar os dados do jogador, utilizando o ID obtido pela função anterior.
 @st.cache_data(ttl=3600)
-def carregar_dados_jogador(nome_jogador, tipo_temporada):    
+def carregar_dados_jogador(nome_jogador, tipo_temporada):
+
     player_id = buscar_player_id(nome_jogador)
 
     if player_id is None:
-        print(f"Jogador '{nome_jogador}' não encontrado.")
         return None
 
     season = temporada_atual()
 
-    if tipo_temporada == "1":
-
-        df = playergamelog.PlayerGameLog(
-        player_id=player_id,
-        season=season,
-        season_type_all_star="Regular Season",
-        timeout=60
-    ).get_data_frames()[0]
-
-    elif tipo_temporada == "2":
-
-        df = playergamelog.PlayerGameLog(
+    arquivo_cache = f"data/cache/cache_{player_id}.csv"
+    def fetch(tipo):
+        return playergamelog.PlayerGameLog(
             player_id=player_id,
             season=season,
-            season_type_all_star="Playoffs",
+            season_type_all_star=tipo,
             timeout=60
         ).get_data_frames()[0]
 
-    elif tipo_temporada == "3":
+    # 🔁 TENTAR BUSCAR DA API (3 vezes)
+    import time
+    for tentativa in range(3):
+        try:
 
-        regular = playergamelog.PlayerGameLog(
-            player_id=player_id,
-            season=season,
-            season_type_all_star="Regular Season",
-            timeout=60
-        ).get_data_frames()[0]
+            if tipo_temporada == "1":
+                df = fetch("Regular Season")
 
-        playoffs = playergamelog.PlayerGameLog(
-            player_id=player_id,
-            season=season,
-            season_type_all_star="Playoffs",
-            timeout=60
-        ).get_data_frames()[0]
+            elif tipo_temporada == "2":
+                df = fetch("Playoffs")
 
-        df = pd.concat([regular, playoffs])
+            elif tipo_temporada == "3":
+                regular = fetch("Regular Season")
+                playoffs = fetch("Playoffs")
+                df = pd.concat([regular, playoffs])
 
-    else:
-        raise ValueError("Opção inválida.")
+            else:
+                return None
 
-    return df
+            # 💾 SALVA CSV
+            df.to_csv(arquivo_cache, index=False)
+
+            return df
+
+        except Exception:
+            time.sleep(2)
+
+    # 💥 FALLBACK → CSV
+    try:
+        df = pd.read_csv(arquivo_cache)
+        return df
+    except:
+        return None
