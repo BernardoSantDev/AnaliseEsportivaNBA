@@ -29,3 +29,5 @@ estatistica = st.selectbox( "Estatística", [
     "MINUTOS", 
     "PLUS_MINUS" 
     ])
+
+linha = st.number_input("Linha da aposta", value=10)
