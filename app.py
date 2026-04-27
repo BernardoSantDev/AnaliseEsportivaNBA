@@ -76,6 +76,12 @@ if st.button("Analisar jogador"):
                 linha,
                 ultimos
             )
+            st.subheader("📊 Gráfico de tendência")
+            grafico_tendencia(
+                df,
+                estatistica,
+                ultimos
+            )
             st.subheader("🏀 Tendência vs adversário")
             tendencia_vs_time(
                 df,
