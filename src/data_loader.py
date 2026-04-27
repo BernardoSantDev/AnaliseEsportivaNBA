@@ -67,17 +67,19 @@ def carregar_dados_jogador(nome_jogador, tipo_temporada):
     if tipo_temporada == "1":
 
         df = playergamelog.PlayerGameLog(
-            player_id=player_id,
-            season=season,
-            season_type_all_star="Regular Season"
-        ).get_data_frames()[0]
+        player_id=player_id,
+        season=season,
+        season_type_all_star="Regular Season",
+        timeout=60
+    ).get_data_frames()[0]
 
     elif tipo_temporada == "2":
 
         df = playergamelog.PlayerGameLog(
             player_id=player_id,
             season=season,
-            season_type_all_star="Playoffs"
+            season_type_all_star="Playoffs",
+            timeout=60
         ).get_data_frames()[0]
 
     elif tipo_temporada == "3":
@@ -85,13 +87,15 @@ def carregar_dados_jogador(nome_jogador, tipo_temporada):
         regular = playergamelog.PlayerGameLog(
             player_id=player_id,
             season=season,
-            season_type_all_star="Regular Season"
+            season_type_all_star="Regular Season",
+            timeout=60
         ).get_data_frames()[0]
 
         playoffs = playergamelog.PlayerGameLog(
             player_id=player_id,
             season=season,
-            season_type_all_star="Playoffs"
+            season_type_all_star="Playoffs",
+            timeout=60
         ).get_data_frames()[0]
 
         df = pd.concat([regular, playoffs])
