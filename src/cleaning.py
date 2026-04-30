@@ -27,11 +27,9 @@ def limpar_dados(df):
     df["ADVERSARIO"] = df["CONFRONTO"].str[-3:]
 
 
-    df["FG_%"] = df["CESTAS_CONVERTIDAS"] / df["CESTAS_TENTADAS"]
-
-    df["C3_%"] = df["C3_CONVERTIDOS"] / df["C3_TENTADOS"]
-
-    df["LL_%"] = df["LL_CONVERTIDOS"] / df["LL_TENTADOS"]
+    df["FG_%"] = df["CESTAS_CONVERTIDAS"] / df["CESTAS_TENTADAS"].replace(0, None)
+    df["C3_%"] = df["C3_CONVERTIDOS"] / df["C3_TENTADOS"].replace(0, None)
+    df["LL_%"] = df["LL_CONVERTIDOS"] / df["LL_TENTADOS"].replace(0, None)
 
 
     df["DATA"] = pd.to_datetime(df["DATA"])
