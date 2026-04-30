@@ -20,3 +20,5 @@ data/raw/
 # sistema
 .DS_Store
 Thumbs.db
+
+.devcontainer/
