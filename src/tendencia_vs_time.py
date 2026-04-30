@@ -2,8 +2,7 @@ import streamlit as st
 
 def tendencia_vs_time(df, estatistica, linha, adversario):
 
-    df_time = df[df["ADVERSARIO"] == adversario]
-
+    df_time = df[df["ADVERSARIO"].str.upper() == adversario.upper()]
     if df_time.empty:
         st.warning("Nenhum jogo encontrado contra esse adversário.")
         return
