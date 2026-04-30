@@ -4,6 +4,8 @@ from datetime import datetime
 import unicodedata
 import pandas as pd
 import streamlit as st
+import os
+
 
 
 # Criando uma função para checar qual a temporada atual
