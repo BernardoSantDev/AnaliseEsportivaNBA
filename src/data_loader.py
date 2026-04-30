@@ -63,6 +63,7 @@ def carregar_dados_jogador(nome_jogador, tipo_temporada):
 
     season = temporada_atual()
 
+    os.makedirs("data/cache", exist_ok=True)
     arquivo_cache = f"data/cache/cache_{player_id}.csv"
 
     def fetch(tipo):
