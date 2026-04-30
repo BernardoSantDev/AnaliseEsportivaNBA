@@ -61,9 +61,10 @@ if st.button("Analisar jogador"):
     if nome == "" or adversario == "":
         st.warning("Preencha jogador e adversário")
     else:
-        df = carregar_dados_jogador(
-            nome,
-            mapa_temporada[tipo_temporada]
+        with st.spinner("Buscando dados do jogador..."):
+            df = carregar_dados_jogador(
+                nome,
+                mapa_temporada[tipo_temporada]
         )
         if df is None:
             st.error("Jogador não encontrado")
