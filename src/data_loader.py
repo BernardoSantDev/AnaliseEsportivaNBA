@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 
 
-#Criando uma função para checar qual a temporada atual
+# Criando uma função para checar qual a temporada atual
 def temporada_atual():
     hoje = datetime.now()
     ano = hoje.year
@@ -18,9 +18,8 @@ def temporada_atual():
         return f"{ano-1}-{str(ano)[-2:]}"
 
 
-
-#Essa função eu utilizo para buscar o ID do jogador a partir do nome completo, pois a API da NBA utiliza o ID para realizar as consultas de dados. 
-#A função percorre a lista de jogadores disponíveis e compara o nome completo com o nome fornecido, retornando o ID correspondente. 
+# Essa função eu utilizo para buscar o ID do jogador a partir do nome completo, pois a API da NBA utiliza o ID para realizar as consultas de dados.
+# A função percorre a lista de jogadores disponíveis e compara o nome completo com o nome fornecido, retornando o ID correspondente.
 # Se o jogador não for encontrado, a função retorna None.
 
 def remover_acentos(texto):
@@ -32,23 +31,22 @@ def remover_acentos(texto):
     ).decode("ASCII")
 
 
+@st.cache_data(ttl=86400)
 def buscar_player_id(nome_jogador):
-
-    nome_input = remover_acentos(nome_jogador.lower())
 
     lista_players = players.get_players()
 
+    nome_input = remover_acentos(nome_jogador.lower())
+
+    # tenta match exato primeiro (muito mais rápido)
     for player in lista_players:
-
-        nome_api = remover_acentos(
-            player["full_name"].lower()
-        )
-
-        if nome_input in nome_api:
-
+        if nome_input == remover_acentos(player["full_name"].lower()):
             return player["id"]
 
-    print(f"Jogador '{nome_jogador}' não encontrado.")
+    # fallback (contém)
+    for player in lista_players:
+        if nome_input in remover_acentos(player["full_name"].lower()):
+            return player["id"]
 
     return None
 
@@ -64,6 +62,7 @@ def carregar_dados_jogador(nome_jogador, tipo_temporada):
     season = temporada_atual()
 
     arquivo_cache = f"data/cache/cache_{player_id}.csv"
+
     def fetch(tipo):
         return playergamelog.PlayerGameLog(
             player_id=player_id,
