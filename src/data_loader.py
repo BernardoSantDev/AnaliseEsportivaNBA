@@ -71,39 +71,37 @@ def carregar_dados_jogador(nome_jogador, tipo_temporada):
             player_id=player_id,
             season=season,
             season_type_all_star=tipo,
-            timeout=60
+            timeout=15  # timeout menor: se a NBA bloqueou o IP, falha rápido em vez de travar minutos
         ).get_data_frames()[0]
 
     # 🔁 TENTAR BUSCAR DA API (3 vezes)
     import time
+    ultimo_erro = None
     for tentativa in range(3):
         try:
-
             if tipo_temporada == "1":
                 df = fetch("Regular Season")
-
             elif tipo_temporada == "2":
                 df = fetch("Playoffs")
-
             elif tipo_temporada == "3":
                 regular = fetch("Regular Season")
                 playoffs = fetch("Playoffs")
                 df = pd.concat([regular, playoffs])
-
             else:
                 return None
 
-            # 💾 SALVA CSV
             df.to_csv(arquivo_cache, index=False)
-
             return df
 
-        except Exception:
+        except Exception as e:
+            ultimo_erro = e
             time.sleep(2)
 
     # 💥 FALLBACK → CSV
     try:
         df = pd.read_csv(arquivo_cache)
+        st.warning(f"Usando dados em cache (API indisponível: {ultimo_erro})")
         return df
-    except:
+    except Exception:
+        st.error(f"Não foi possível buscar dados da NBA API. Erro: {ultimo_erro}")
         return None
